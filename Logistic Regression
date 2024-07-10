@@ -1,0 +1,62 @@
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
+import seaborn as sn
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv("/content/drive/MyDrive/Semester projects/Semester 5/Semester 5 AI/AI Lab 4/HR_comma_sep.csv")
+df
+
+corr_matrix = df.corr()
+sn.heatmap(corr_matrix, annot=True, cmap="YlGnBu")
+
+plt.figure(figsize=(4, 4))
+plt.bar(df['salary'], df['left'])
+plt.xlabel('Salary')
+plt.ylabel('Left')
+plt.title('Salary')
+plt.show()
+
+plt.figure(figsize=(4, 4))
+plt.bar(df['Department'], df['left'])
+plt.xlabel('Department')
+plt.ylabel('Left')
+plt.title('Department')
+plt.show()
+
+x=df['time_spend_company'].values.reshape(-1, 1)
+y=df['left']
+
+model = LogisticRegression()
+
+X_train, X_test, y_train, y_test = train_test_split(x,y, test_size=0.1,random_state=44)
+
+**Fitting our values**
+
+model.fit(X_train, y_train)
+
+**Measure accuracy of our model**
+
+model.score(X_test, y_test)
+
+
+
+df = pd.read_csv("/content/drive/MyDrive/Semester projects/Semester 5/Semester 5 AI/AI Lab 4/Iris.csv")
+df
+
+x=df[['SepalLengthCm',	'SepalWidthCm',	'PetalLengthCm',	'PetalWidthCm']]
+y=df['Species']
+
+model = LogisticRegression()
+
+X_train, X_test, y_train, y_test = train_test_split(x,y, test_size=0.2,random_state=44)
+
+
+
+model.fit(X_train, y_train)
+
+**Measure accuracy of our model**
+
+model.score(X_test, y_test)
